@@ -1,20 +1,30 @@
 (* ::Package:: *)
 
-expSumVisualizer[p_] := Accumulate[Exp[2*Pi*I*#^2/p]& /@ Table[n, {n, 1, p}]]
+expSumList[p_] := Accumulate[Exp[2.0*Pi*I*#^2/p]& /@ Range[p]]
 
-expSumVisualizer[3]
-
-
-list = expSumVisualizer[1057]
+expSumList[3]
 
 
-ListLinePlot[N[{Re[#], Im[#]}& /@ list]]
+expSumList[4.5]
 
 
-generalizedExpSumVisual[p_, c_] := Accumulate[Exp[2*Pi*I*#^c/p]& /@ Table[n, {n, 1, p}]] 
+list = expSumList[1057];
 
 
-list2 = generalizedExpSumVisual[1057, 3]
+Clear[visualizer]
+visualizer[n_] := ListLinePlot[N[{Re[#], Im[#]}& /@ expSumList[n]]]
+
+
+visualizer[200*Pi]
+
+
+Table[{visualizer[Prime[n]], Prime[n]}, {n, 50, 75}]
+
+
+generalizedExpSumList[p_, c_] := Accumulate[Exp[2.0*Pi*I*#^c/p]& /@ Range[p]]
+
+
+list2 = generalizedExpSumList[1057, 3];
 
 
 ListLinePlot[N[{Re[#], Im[#]}& /@ list2]]
